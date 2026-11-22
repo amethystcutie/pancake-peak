@@ -1,5 +1,13 @@
 [gd_scene format=3 uid="uid://cu4wkidxr7r10"]
 
+[ext_resource type="Texture2D" uid="uid://cp8rr8w4ygn5m" path="res://assets/sprites/bg/shop.png" id="1_uwrxv"]
+
 [node name="Game" type="Node2D" unique_id=979444004]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1513901471]
+scale = Vector2(2, 2)
+texture = ExtResource("1_uwrxv")
+centered = false
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=800000417]
+position = Vector2(90, 160)
