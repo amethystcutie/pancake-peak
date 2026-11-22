@@ -1,13 +1,225 @@
 [gd_scene format=3 uid="uid://cu4wkidxr7r10"]
 
+[ext_resource type="Script" uid="uid://bdv350emagj0o" path="res://src/game.gd" id="1_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://cp8rr8w4ygn5m" path="res://assets/sprites/bg/shop.png" id="1_uwrxv"]
+[ext_resource type="Texture2D" uid="uid://b2fthewq1boj5" path="res://assets/sprites/characters/1.png" id="2_lbhrr"]
+[ext_resource type="Texture2D" uid="uid://c074c1xvju0ft" path="res://assets/sprites/counter.png" id="2_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://dp5qubddjw2u" path="res://assets/sprites/board.png" id="3_lbhrr"]
+[ext_resource type="Shader" uid="uid://b3r886ckkwyri" path="res://src/shaders/pixel.gdshader" id="3_vtaks"]
+[ext_resource type="Texture2D" uid="uid://b5qnmx4y5cbl6" path="res://assets/sprites/note.png" id="5_iywne"]
+[ext_resource type="Script" uid="uid://dvathu18ttari" path="res://src/components/button.gd" id="5_p57ef"]
+[ext_resource type="Script" uid="uid://ch5x268lqwb7p" path="res://src/components/runtime_visible.gd" id="6_p57ef"]
+[ext_resource type="PackedScene" uid="uid://cpukf1n58qnnr" path="res://objects/components/screen_pos.tscn" id="8_0tnpc"]
 
-[node name="Game" type="Node2D" unique_id=979444004]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0tnpc"]
+shader = ExtResource("3_vtaks")
+shader_parameter/colors = PackedColorArray(1, 0.93333334, 0.84313726, 1, 0.56145394, 0.35167193, 0.34414202, 1, 0.833719, 0.59669924, 0.5142104, 1, 0.95686275, 0.8235294, 0.6117647, 1, 1, 1, 0.6745098, 1, 1, 0.7372549, 0.7372549, 1, 0.99607843, 0.9019608, 0.9019608, 1, 0.3254902, 0.4392157, 0.627451, 1, 0.44705883, 0.7411765, 1, 1, 0.7647059, 0.8862745, 1, 1, 0.2456994, 0.1374296, 0.13391295, 1, 0.8866734, 0.4874298, 0.46640015, 1, 0.5272557, 0.47938454, 0.5224591, 1, 0.26512054, 0.234292, 0.2620976, 1, 0.16722846, 0.14541501, 0.16509575, 1, 0.85882354, 0.81960785, 0.77254903, 1, 0.6117647, 0.56078434, 0.5019608, 1, 0.92941177, 0.5568628, 0.5803922, 1)
+shader_parameter/pixelate_amount = 101
+shader_parameter/outline_color = Color(0.16862746, 0.14509805, 0.16470589, 1)
+shader_parameter/offset = 2.99600014231
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1513901471]
+[sub_resource type="Animation" id="Animation_gee14"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:rotation")
+tracks/0/interp = 4
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-3.1415927]
+}
+
+[sub_resource type="Animation" id="Animation_0tnpc"]
+resource_name = "fade_in"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:rotation")
+tracks/0/interp = 4
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.3, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.7853982, 1.8325958, 1.4253522, 1.5707964]
+}
+
+[sub_resource type="Animation" id="Animation_u5sy4"]
+resource_name = "fade_out"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:rotation")
+tracks/0/interp = 4
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [3.1415925, 1.1058404, -0.2617994, 6.2831855]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gee14"]
+_data = {
+&"RESET": SubResource("Animation_gee14"),
+&"fade_in": SubResource("Animation_0tnpc"),
+&"fade_out": SubResource("Animation_u5sy4")
+}
+
+[node name="Game" type="Node2D" unique_id=1024417262]
+script = ExtResource("1_u5sy4")
+
+[node name="ShopBackground" type="Sprite2D" parent="." unique_id=2122756602]
+position = Vector2(-28, 0)
 scale = Vector2(2, 2)
 texture = ExtResource("1_uwrxv")
 centered = false
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=800000417]
+[node name="GameCamera" type="Camera2D" parent="." unique_id=800000417]
+unique_name_in_owner = true
 position = Vector2(90, 160)
+
+[node name="Customer" type="Sprite2D" parent="." unique_id=957042685]
+material = SubResource("ShaderMaterial_0tnpc")
+position = Vector2(0.684, 32.651)
+scale = Vector2(0.135, 0.135)
+texture = ExtResource("2_lbhrr")
+centered = false
+
+[node name="Board" type="Sprite2D" parent="." unique_id=1221037933]
+scale = Vector2(2, 2)
+texture = ExtResource("3_lbhrr")
+centered = false
+
+[node name="Counter" type="Sprite2D" parent="." unique_id=1401410885]
+position = Vector2(0, 192)
+scale = Vector2(2, 2)
+texture = ExtResource("2_lnu2h")
+centered = false
+
+[node name="Control" type="Control" parent="." unique_id=224737509]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control" unique_id=555780343]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 16.0
+offset_right = 180.0
+offset_bottom = 64.0
+grow_horizontal = 2
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/ScrollContainer" unique_id=1879545637]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="Control/ScrollContainer/HBoxContainer" unique_id=1294106924]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+script = ExtResource("5_p57ef")
+metadata/_custom_type_script = "uid://dvathu18ttari"
+
+[node name="TextureRect" type="TextureRect" parent="Control/ScrollContainer/HBoxContainer/Button" unique_id=8913871]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 32.0
+offset_bottom = 16.0
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_iywne")
+stretch_mode = 5
+
+[node name="Button2" type="Button" parent="Control/ScrollContainer/HBoxContainer" unique_id=1610939173]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+script = ExtResource("5_p57ef")
+metadata/_custom_type_script = "uid://dvathu18ttari"
+
+[node name="TextureRect" type="TextureRect" parent="Control/ScrollContainer/HBoxContainer/Button2" unique_id=1908800602]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 32.0
+offset_bottom = 16.0
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_iywne")
+stretch_mode = 5
+
+[node name="Menu" type="CanvasLayer" parent="." unique_id=1182246853]
+layer = 3
+
+[node name="NextButton" type="Button" parent="Menu" unique_id=1832793445]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -15.5
+offset_bottom = 15.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "~>"
+
+[node name="PrevButton" type="Button" parent="Menu" unique_id=952451246]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -15.5
+offset_right = 27.0
+offset_bottom = 15.5
+grow_vertical = 2
+text = "<~"
+
+[node name="CameraPositions" type="Node2D" parent="." unique_id=614455183]
+unique_name_in_owner = true
+
+[node name="Shop" parent="CameraPositions" unique_id=1048286462 instance=ExtResource("8_0tnpc")]
+position = Vector2(90, 160)
+
+[node name="Baking" parent="CameraPositions" unique_id=118629961 instance=ExtResource("8_0tnpc")]
+position = Vector2(426, 160)
+
+[node name="Stove" parent="CameraPositions" unique_id=1380172483 instance=ExtResource("8_0tnpc")]
+position = Vector2(730, 160)
+
+[node name="Table" parent="CameraPositions" unique_id=326914212 instance=ExtResource("8_0tnpc")]
+position = Vector2(1050, 160)
+
+[node name="ScreenTransition" type="CanvasLayer" parent="." unique_id=2078885148]
+layer = 80
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="ScreenTransition" unique_id=1115701458]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 460.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415925
+color = Color(0.19607843, 0.16862746, 0.19215687, 1)
+
+[node name="ScreenTransitionPlayer" type="AnimationPlayer" parent="ScreenTransition" unique_id=1049170155]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_gee14")
+autoplay = &"fade_in"
+
+[node name="RuntimeVisibility" type="Node" parent="ScreenTransition" unique_id=1855992404]
+script = ExtResource("6_p57ef")
+metadata/_custom_type_script = "uid://ch5x268lqwb7p"

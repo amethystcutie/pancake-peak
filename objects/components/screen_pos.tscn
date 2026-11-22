@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cpukf1n58qnnr"]
+
+[ext_resource type="Script" uid="uid://ch5x268lqwb7p" path="res://src/components/runtime_visible.gd" id="1_2qrio"]
+
+[node name="ScreenPos" type="Marker2D" unique_id=1048286462]
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=2072507134]
+color = Color(1, 0.8, 0.8627451, 1)
+offset = Vector2(-90, -160)
+invert_enabled = true
+invert_border = 2.0
+polygon = PackedVector2Array(0, 0, 180, 0, 180, 320, 0, 320)
+
+[node name="RuntimeVisibility" type="Node" parent="Polygon2D" unique_id=1955984627]
+script = ExtResource("1_2qrio")
+visibility = false
+metadata/_custom_type_script = "uid://ch5x268lqwb7p"
