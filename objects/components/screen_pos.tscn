@@ -10,6 +10,7 @@ offset = Vector2(-90, -160)
 invert_enabled = true
 invert_border = 2.0
 polygon = PackedVector2Array(0, 0, 180, 0, 180, 320, 0, 320)
+metadata/_edit_lock_ = true
 
 [node name="RuntimeVisibility" type="Node" parent="Polygon2D" unique_id=1955984627]
 script = ExtResource("1_2qrio")

@@ -1,0 +1,2 @@
+class_name FallingPancake
+extends RigidBody2D

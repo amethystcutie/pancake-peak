@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 AspectBorders="*uid://bj5rda060gb21"
+GameManager="*uid://bscxg5rs06mu6"
 
 [display]
 
@@ -33,6 +34,10 @@ window/handheld/orientation=5
 
 enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
 
+[global_group]
+
+plate=""
+
 [gui]
 
 common/auto_focus_strategy=1
@@ -44,6 +49,7 @@ pointing/emulate_touch_from_mouse=true
 
 [physics]
 
+2d/physics_engine="Rapier2D"
 3d/physics_engine="Jolt Physics"
 
 [rendering]

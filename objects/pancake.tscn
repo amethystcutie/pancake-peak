@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dv4m1nxipbl5y"]
+
+[ext_resource type="Script" uid="uid://dehha5cjrqvhx" path="res://src/objects/pancake.gd" id="1_k7cdy"]
+[ext_resource type="Texture2D" uid="uid://c16nsgdav1ovh" path="res://assets/sprites/pancake_flat.png" id="1_xlunv"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xlunv"]
+radius = 4.0
+height = 42.0
+
+[node name="RigidBody2D" type="RigidBody2D" unique_id=1654921283]
+mass = 0.2
+max_contacts_reported = 2
+script = ExtResource("1_k7cdy")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1693250998]
+scale = Vector2(2, 2)
+texture = ExtResource("1_xlunv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=996988080]
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_xlunv")

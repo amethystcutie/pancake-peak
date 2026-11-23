@@ -1,10 +1,6 @@
 extends Node2D
 
-enum Areas {
-	SHOP, BAKING, STOVE, TABLE
-}
 
-@export var current_area := Areas.SHOP
 
 func move_to(pos: Vector2) -> void:
 	%ScreenTransitionPlayer.play("fade_out")
@@ -14,19 +10,19 @@ func move_to(pos: Vector2) -> void:
 
 func _ready() -> void:
 	$Menu/NextButton.pressed.connect(func():
-		current_area += 1
-		if current_area > Areas.size() - 1: current_area = 0
+		GameManager.current_area += 1
+		if GameManager.current_area > GameManager.Areas.size() - 1: GameManager.current_area = 0
 		next_area()
 	)
 	$Menu/PrevButton.pressed.connect(func():
-		current_area -= 1
-		if current_area < 0: current_area = Areas.size() - 1
+		GameManager.current_area -= 1
+		if GameManager.current_area < 0: GameManager.current_area = GameManager.Areas.size() - 1
 		next_area()
 	)
 
 func next_area() -> void:
-	match current_area:
-			Areas.SHOP: move_to($CameraPositions/Shop.global_position)
-			Areas.BAKING: move_to($CameraPositions/Baking.global_position)
-			Areas.STOVE: move_to($CameraPositions/Stove.global_position)
-			Areas.TABLE: move_to($CameraPositions/Table.global_position)
+	match GameManager.current_area:
+			GameManager.Areas.SHOP: move_to($CameraPositions/Shop.global_position)
+			GameManager.Areas.BAKING: move_to($CameraPositions/Baking.global_position)
+			GameManager.Areas.STOVE: move_to($CameraPositions/Stove.global_position)
+			GameManager.Areas.TABLE: move_to($CameraPositions/Table.global_position)
