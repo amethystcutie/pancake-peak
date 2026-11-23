@@ -6,6 +6,8 @@ enum Areas {
 
 @export var current_area := Areas.SHOP
 
+signal switched_to(area: Areas)
+
 func _ready() -> void:
 	pass # Replace with function body.
 

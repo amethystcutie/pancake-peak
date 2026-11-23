@@ -7,16 +7,18 @@
 [ext_resource type="Texture2D" uid="uid://dp5qubddjw2u" path="res://assets/sprites/board.png" id="3_lbhrr"]
 [ext_resource type="Shader" uid="uid://b3r886ckkwyri" path="res://src/shaders/pixel.gdshader" id="3_vtaks"]
 [ext_resource type="Texture2D" uid="uid://b5qnmx4y5cbl6" path="res://assets/sprites/note.png" id="5_iywne"]
-[ext_resource type="Script" uid="uid://dvathu18ttari" path="res://src/components/button.gd" id="5_p57ef"]
 [ext_resource type="Texture2D" uid="uid://b2fqrmrvcpuga" path="res://assets/sprites/kitchen_wallpaper.png" id="6_dinhu"]
 [ext_resource type="Script" uid="uid://ch5x268lqwb7p" path="res://src/components/runtime_visible.gd" id="6_p57ef"]
 [ext_resource type="Texture2D" uid="uid://bma7r3vh752aw" path="res://assets/sprites/baking_counter.png" id="7_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://cpukf1n58qnnr" path="res://objects/components/screen_pos.tscn" id="8_0tnpc"]
+[ext_resource type="Script" uid="uid://bcrjlb5htsdls" path="res://src/minigames/baking.gd" id="8_264po"]
 [ext_resource type="Texture2D" uid="uid://blv77gy2pighx" path="res://icon.svg" id="8_kvuet"]
 [ext_resource type="Script" uid="uid://bcgoibm4uxnns" path="res://src/minigames/table.gd" id="9_ca42v"]
 [ext_resource type="Texture2D" uid="uid://bps75vslqij2v" path="res://assets/sprites/pan.png" id="10_rysoc"]
+[ext_resource type="Texture2D" uid="uid://b1cisf23qm2wb" path="res://assets/sprites/recipe.png" id="11_264po"]
 [ext_resource type="Texture2D" uid="uid://bs2wlnlg0x843" path="res://assets/sprites/pancake.png" id="11_ssvqc"]
 [ext_resource type="Texture2D" uid="uid://uty4mrpb2yk2" path="res://assets/sprites/plate.png" id="12_rysoc"]
+[ext_resource type="Texture2D" uid="uid://dna26c7l81okh" path="res://assets/sprites/plating_wallpaper.png" id="16_ssvqc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0tnpc"]
 shader = ExtResource("3_vtaks")
@@ -25,12 +27,162 @@ shader_parameter/pixelate_amount = 101
 shader_parameter/outline_color = Color(0.16862746, 0.14509805, 0.16470589, 1)
 shader_parameter/offset = 2.99600014231
 
+[sub_resource type="Animation" id="Animation_rysoc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Customer:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Customer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(96, 240)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Customer:skew")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Customer:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.135, 0.135)]
+}
+
+[sub_resource type="Animation" id="Animation_ssvqc"]
+resource_name = "customer_walk_in"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Customer:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.90000004),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-96, 240), Vector2(96, 240)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Customer:skew")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.21118484, -0.19373155, 0.17976892, -0.17976892, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Customer:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.7, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.135, 0.135), Vector2(-0.135, 0.135)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Customer:flip_h")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_264po"]
+resource_name = "customer_walk_out"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Customer:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(96, 240), Vector2(54.399998, 224), Vector2(12.800003, 240.00002), Vector2(-28.800003, 224), Vector2(-70.399994, 240.00002), Vector2(-112, 240)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Customer:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.135, 0.135)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_264po"]
+_data = {
+&"RESET": SubResource("Animation_rysoc"),
+&"customer_walk_in": SubResource("Animation_ssvqc"),
+&"customer_walk_out": SubResource("Animation_264po")
+}
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ssvqc"]
+texture = ExtResource("5_iywne")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 6.0
+texture_margin_bottom = 10.0
+axis_stretch_vertical = 1
+region_rect = Rect2(0, 0, 16, 24)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ssvqc"]
 radius = 4.0
 height = 64.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rysoc"]
 size = Vector2(310, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ssvqc"]
+size = Vector2(172, 192)
 
 [sub_resource type="Animation" id="Animation_gee14"]
 length = 0.001
@@ -102,10 +254,12 @@ centered = false
 
 [node name="Customer" type="Sprite2D" parent="Shop" unique_id=957042685]
 material = SubResource("ShaderMaterial_0tnpc")
-position = Vector2(0.684, 32.651)
+position = Vector2(96, 240)
 scale = Vector2(0.135, 0.135)
 texture = ExtResource("2_lbhrr")
 centered = false
+offset = Vector2(-706.04443, -1535.9185)
+flip_h = true
 
 [node name="Counter" type="Sprite2D" parent="Shop" unique_id=1401410885]
 position = Vector2(0, 192)
@@ -122,30 +276,19 @@ scale = Vector2(2, 2)
 texture = ExtResource("3_lbhrr")
 centered = false
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Shop/Control" unique_id=555780343]
-custom_minimum_size = Vector2(180, 0)
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
+[node name="HBoxContainer" type="HBoxContainer" parent="Shop/Control" unique_id=1879545637]
+layout_mode = 0
 offset_top = 16.0
 offset_right = 180.0
 offset_bottom = 64.0
-grow_horizontal = 2
-vertical_scroll_mode = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Shop/Control/ScrollContainer" unique_id=1879545637]
-layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Button" type="Button" parent="Shop/Control/ScrollContainer/HBoxContainer" unique_id=1294106924]
+[node name="CountNote" type="Control" parent="Shop/Control/HBoxContainer" unique_id=1493659584]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
-flat = true
-script = ExtResource("5_p57ef")
-metadata/_custom_type_script = "uid://dvathu18ttari"
 
-[node name="TextureRect" type="TextureRect" parent="Shop/Control/ScrollContainer/HBoxContainer/Button" unique_id=8913871]
+[node name="TextureRect" type="TextureRect" parent="Shop/Control/HBoxContainer/CountNote" unique_id=8913871]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -156,14 +299,11 @@ mouse_filter = 2
 texture = ExtResource("5_iywne")
 stretch_mode = 5
 
-[node name="Button2" type="Button" parent="Shop/Control/ScrollContainer/HBoxContainer" unique_id=1610939173]
+[node name="FlavourNote" type="Control" parent="Shop/Control/HBoxContainer" unique_id=852785131]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
-flat = true
-script = ExtResource("5_p57ef")
-metadata/_custom_type_script = "uid://dvathu18ttari"
 
-[node name="TextureRect" type="TextureRect" parent="Shop/Control/ScrollContainer/HBoxContainer/Button2" unique_id=1908800602]
+[node name="TextureRect" type="TextureRect" parent="Shop/Control/HBoxContainer/FlavourNote" unique_id=1908800602]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -173,10 +313,64 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("5_iywne")
 stretch_mode = 5
+
+[node name="Control" type="Control" parent="Shop/Control/HBoxContainer" unique_id=476544758]
+layout_mode = 2
+
+[node name="ToppingNote1" type="Control" parent="Shop/Control/HBoxContainer" unique_id=260336301]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Shop/Control/HBoxContainer/ToppingNote1" unique_id=1064968249]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 32.0
+offset_bottom = 16.0
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_iywne")
+stretch_mode = 5
+
+[node name="ToppingNote2" type="Control" parent="Shop/Control/HBoxContainer" unique_id=824763170]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Shop/Control/HBoxContainer/ToppingNote2" unique_id=1319766647]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 32.0
+offset_bottom = 16.0
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_iywne")
+stretch_mode = 5
+
+[node name="ToppingNote3" type="Control" parent="Shop/Control/HBoxContainer" unique_id=545823210]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Shop/Control/HBoxContainer/ToppingNote3" unique_id=1446022455]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 32.0
+offset_bottom = 16.0
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_iywne")
+stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Shop" unique_id=1600651240]
+libraries/ = SubResource("AnimationLibrary_264po")
+autoplay = &"customer_walk_in"
+speed_scale = 0.75
 
 [node name="Baking" type="Node2D" parent="." unique_id=911314305]
 unique_name_in_owner = true
 position = Vector2(336, 0)
+script = ExtResource("8_264po")
 
 [node name="Wallpaper" type="Sprite2D" parent="Baking" unique_id=1076279921]
 texture_repeat = 2
@@ -207,64 +401,64 @@ text = "counter"
 
 [node name="Button" type="Button" parent="Baking" unique_id=768449772]
 offset_left = 16.0
-offset_top = 96.0
+offset_top = 104.0
 offset_right = 43.0
-offset_bottom = 116.0
+offset_bottom = 124.0
 theme_override_font_sizes/font_size = 8
 text = "flour"
 
 [node name="Button2" type="Button" parent="Baking" unique_id=1831921044]
 offset_left = 64.0
-offset_top = 96.0
-offset_right = 91.0
-offset_bottom = 116.0
+offset_top = 104.0
+offset_right = 94.0
+offset_bottom = 124.0
 theme_override_font_sizes/font_size = 8
 text = "sugar"
 
 [node name="Button3" type="Button" parent="Baking" unique_id=1491968805]
 offset_left = 16.0
-offset_top = 64.0
+offset_top = 72.0
 offset_right = 82.0
-offset_bottom = 84.0
+offset_bottom = 92.0
 theme_override_font_sizes/font_size = 8
 text = "baking powder"
 
 [node name="Button6" type="Button" parent="Baking" unique_id=559707765]
 offset_left = 96.0
-offset_top = 64.0
+offset_top = 72.0
 offset_right = 129.0
-offset_bottom = 84.0
+offset_bottom = 92.0
 theme_override_font_sizes/font_size = 8
 text = "butter"
 
 [node name="Button7" type="Button" parent="Baking" unique_id=1284372994]
 offset_left = 144.0
-offset_top = 64.0
+offset_top = 72.0
 offset_right = 169.0
-offset_bottom = 84.0
+offset_bottom = 92.0
 theme_override_font_sizes/font_size = 8
 text = "milk"
 
 [node name="Button4" type="Button" parent="Baking" unique_id=1815028034]
 offset_left = 112.0
-offset_top = 96.0
+offset_top = 104.0
 offset_right = 134.0
-offset_bottom = 116.0
+offset_bottom = 124.0
 theme_override_font_sizes/font_size = 8
 text = "salt"
 
 [node name="Button5" type="Button" parent="Baking" unique_id=91300034]
 offset_left = 144.0
-offset_top = 96.0
-offset_right = 166.0
-offset_bottom = 116.0
+offset_top = 104.0
+offset_right = 170.0
+offset_bottom = 124.0
 theme_override_font_sizes/font_size = 8
 text = "eggs"
 
 [node name="Button8" type="Button" parent="Baking" unique_id=2024720170]
-offset_left = 128.96387
+offset_left = 144.0
 offset_top = 201.8314
-offset_right = 199.67482
+offset_right = 214.71095
 offset_bottom = 242.26512
 rotation = -1.5707964
 theme_override_font_sizes/font_size = 8
@@ -278,9 +472,100 @@ offset_bottom = 224.0
 theme_override_font_sizes/font_size = 8
 text = "bowl"
 
+[node name="Sprite2D2" type="Sprite2D" parent="Baking" unique_id=1377539559]
+position = Vector2(160, 272)
+scale = Vector2(2, 2)
+texture = ExtResource("11_264po")
+
+[node name="RecipeButton" type="Button" parent="Baking" unique_id=871241321]
+offset_left = 144.0
+offset_top = 256.0
+offset_right = 176.0
+offset_bottom = 304.0
+flat = true
+
+[node name="Recipe" type="Control" parent="Baking" unique_id=1409052855]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 90.0
+offset_top = 160.0
+offset_right = 90.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="Baking/Recipe" unique_id=63358630]
+custom_minimum_size = Vector2(180, 320)
+layout_mode = 1
+anchors_preset = 0
+offset_left = -90.0
+offset_top = -160.0
+offset_right = 90.0
+offset_bottom = 160.0
+
+[node name="ColorRect" type="ColorRect" parent="Baking/Recipe/Control" unique_id=2072145298]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1697731, 0.14202225, 0.24862415, 0.49803922)
+
+[node name="PanelContainer" type="PanelContainer" parent="Baking/Recipe" unique_id=335818932]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -47.5
+offset_right = 30.0
+offset_bottom = 47.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxTexture_ssvqc")
+
+[node name="Label" type="Label" parent="Baking/Recipe/PanelContainer" unique_id=1775606725]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+theme_override_colors/font_color = Color(0.30980393, 0.27450982, 0.30588236, 1)
+theme_override_font_sizes/font_size = 4
+text = "1. add flour, baking 
+powder, sugar, and salt
+2. whisk together 
+3. pour in milk
+4. add 3 eggs
+5. add melted butter
+6. whisk
+7. add fruit/chocolate"
+
+[node name="CloseRecipeButton" type="Button" parent="Baking/Recipe" unique_id=850034173]
+layout_mode = 1
+offset_left = 38.0
+offset_top = -96.0
+offset_right = 60.0
+offset_bottom = -65.0
+text = "x"
+
 [node name="Table" type="Node2D" parent="." unique_id=292508294]
 position = Vector2(960, 0)
 script = ExtResource("9_ca42v")
+
+[node name="Wallpaper" type="Sprite2D" parent="Table" unique_id=767680563]
+texture_repeat = 2
+scale = Vector2(2, 2)
+texture = ExtResource("16_ssvqc")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 96, 96)
 
 [node name="Sprite2D" type="Sprite2D" parent="Table" unique_id=513213043]
 position = Vector2(0, 192)
@@ -325,6 +610,15 @@ shape = SubResource("RectangleShape2D_rysoc")
 [node name="Label" type="Label" parent="Table" unique_id=345843619]
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="Pancakes" type="Node2D" parent="Table" unique_id=604042696]
+
+[node name="Stack" type="Area2D" parent="Table" unique_id=118862220]
+position = Vector2(90, 208)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table/Stack" unique_id=209777281]
+position = Vector2(0, -96)
+shape = SubResource("RectangleShape2D_ssvqc")
 
 [node name="GameCamera" type="Camera2D" parent="." unique_id=800000417]
 unique_name_in_owner = true

@@ -12,14 +12,23 @@ var active := false
 func _ready() -> void:
 	$FailZone.body_entered.connect(func(body: Node2D):
 		if body is FallingPancake:
-			body.apply_torque(30)
-			if has_pancake:
-				pancakes -= 1
 			has_pancake = true)
+	
+	GameManager.switched_to.connect(func(area: GameManager.Areas):
+		if area == GameManager.Areas.TABLE:
+			active = true
+			set_process(true)
+		else:
+			pancakes = 0
+			$Pancakes.get_children().map(func(c): c.queue_free())
+			active = false
+			set_process(false)
+	)
 
 func _process(delta: float) -> void: 
-	active = GameManager.current_area == GameManager.Areas.TABLE
 	if !active: return
+	
+	pancakes = $Stack.get_overlapping_bodies().filter(func(b): return b is FallingPancake).size()
 	
 	$Label.text = str(pancakes, " pancakes")
 	$Pan/Pancake.visible = has_pancake
@@ -33,11 +42,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		difficulty = randf_range(0.8, 3.3)
 		
 		var new_pancake = PANCAKE.instantiate()
-		add_child(new_pancake)
+		$Pancakes.add_child(new_pancake)
 		new_pancake.global_position = $Pan.global_position
 		
-		get_tree().create_timer(1).timeout.connect(func():
-			if !has_pancake:
-				pancakes += 1
-				has_pancake = true)
+		get_tree().create_timer(1).timeout.connect(func(): has_pancake = true)
 		

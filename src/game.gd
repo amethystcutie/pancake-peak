@@ -26,3 +26,6 @@ func next_area() -> void:
 			GameManager.Areas.BAKING: move_to($CameraPositions/Baking.global_position)
 			GameManager.Areas.STOVE: move_to($CameraPositions/Stove.global_position)
 			GameManager.Areas.TABLE: move_to($CameraPositions/Table.global_position)
+			
+	await %ScreenTransitionPlayer.animation_finished
+	GameManager.switched_to.emit(GameManager.current_area)
