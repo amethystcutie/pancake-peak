@@ -2,11 +2,13 @@
  A game about stacking pancakes  
  inspired by good pizza great pizza  
 
-<p>
- <img height="500px" src="https://raw.githubusercontent.com/amethystcutie/pancake-peak/refs/heads/main/project/Screenshot_20261122_201919.png"/>
- <img height="500px" src="https://raw.githubusercontent.com/amethystcutie/pancake-peak/refs/heads/main/project/Screenshot_20261122_202356.png"/>
- <img height="500px" src="https://raw.githubusercontent.com/amethystcutie/pancake-peak/refs/heads/main/project/Screenshot_20261122_225108.png"/>
-</p>
+ got the idea because the theme is peak  
+ so its like its peak hours  for a restaurant  
+ and because youre stacking pancakes tall  like a mountain
+
+using godot engine
+
+![screenshots](https://raw.githubusercontent.com/amethystcutie/pancake-peak/refs/heads/main/project/thumb.png)
 
 this is a mobile game where you cook and stack pancakes
 currently implemented:
